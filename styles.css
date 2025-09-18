@@ -1,0 +1,45 @@
+/* =========================
+   Isgu Shop - styles.css
+   ========================= */
+
+/* Paleta rosa claro */
+:root {
+  --pink-50:  hsl(340 100% 97%);
+  --pink-100: hsl(345 90% 94%);
+}
+
+/* Base */
+html, body { min-height: 100%; }
+body { min-height: 100vh; }
+
+/* Fondo degradado rosa claro (estático) */
+.pink-bg {
+  background: linear-gradient(135deg, var(--pink-50), var(--pink-100));
+  background-attachment: fixed;
+}
+
+/* Cards */
+.product-card {
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+.product-card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .08);
+}
+.product-card.selected {
+  transform: translateY(-2px);
+  box-shadow: 0 0.75rem 1.25rem rgba(214, 51, 132, .15);
+}
+
+/* Galería */
+#gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 .25rem .75rem rgba(0,0,0,.06);
+}
+
+/* Carrito */
+#sesion25 .card {
+  border: 1px solid rgba(214, 51, 132, .15);
+}

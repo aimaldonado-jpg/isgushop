@@ -113,19 +113,20 @@ document.getElementById("contactoForm")?.addEventListener("submit", (e) => {
 document.getElementById("btnCambiarCard1")?.addEventListener("click", () => {
   const card = document.querySelector('.product-card[data-product-id="1"]');
   if (!card) return;
-  card.querySelector(".card-title").firstChild.nodeValue = "Caja con chocolates y flores 🌷🍫";
+  card.querySelector(".card-title").firstChild.nodeValue = "Flores crochet 🌷🍫";
   card.querySelector(".card-text strong").textContent = "$950";
   card.querySelector(".extra-text").textContent = "Incluye tarjeta personalizada y empaque temático.";
 });
 
 document.getElementById("btnCambiarImg1")?.addEventListener("click", () => {
   const img = document.querySelector('.product-card[data-product-id="1"] img');
-  if (img) img.src = "https://images.unsplash.com/photo-1589820296150-3d5a2640c9a8?w=800";
+  if (img) img.src = "liston.png";
 });
 
 // ===== Carrito =====
-const cartListEl   = document.getElementById("cartList");
-const cartCountEl  = document.getElementById("cartCount");
+// ===== Carrito =====
+const cartListEl  = document.getElementById("cartList");
+const cartCountEl = document.getElementById("cartCount");
 const clearCartBtn = document.getElementById("clearCartBtn");
 
 function updateCartCount() {
@@ -149,6 +150,21 @@ function addToCart({ id, name, price }) {
 clearCartBtn?.addEventListener("click", () => {
   cartListEl.innerHTML = "";
   updateCartCount();
+});
+
+document.querySelectorAll(".product-card").forEach((card) => {
+  const id    = card.dataset.productId;
+  const name  = card.querySelector(".card-title").childNodes[0].textContent.trim();
+  const price = card.querySelector(".card-text strong").textContent.trim();
+
+  card.querySelector(".btn-select")?.addEventListener("click", () => addToCart({ id, name, price }));
+  card.querySelector(".btn-remove")?.addEventListener("click", () => {
+    const li = cartListEl.querySelector(`[data-id="${id}"]`);
+    if (li) {
+      li.remove();
+      updateCartCount();
+    }
+  });
 });
 
 // ===== Integración con API (Django REST) =====
@@ -210,3 +226,4 @@ function bindCartButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", loadProducts);
+
